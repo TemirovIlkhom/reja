@@ -1,5 +1,6 @@
 console.log("Wab serverni boshlash");
 const express = require("express"); // expressni chaqirib olyapmiz
+const res = require("express/lib/response");
 const app = express(); // app o'zgaruvchisiga expressni chaqirib oldik (aylantirib oldik express kk bolgan joyda appni ishlatsak boladi)
 const http = require("http"); // http ni chaqirish
 
@@ -12,14 +13,16 @@ app.use(express.urlencoded({ extended: true })); // bu codeni yozmasak formdan p
 
 // 3: Views code        BSSR
 app.set("views", "views"); // folderni ko'rsatayapmiz
-app.set("views engine", "ejs"); // views engine ejs ekanligini korsatib beryapmiz
+app.set("view engine", "ejs"); // views engine ejs ekanligini korsatib beryapmiz
 
 // 4: Routing code
-app.get("/hello", (req, res) => {
-    res.end(`<h1 style="background: red">Hello world</h1>`);
+app.post("/create-item", (req, res) => {
+    console.log(req.body);
+    res.json({ test: "success" });
 });
-app.get("/gift", (req, res) => {
-    res.end(`<h1 style="background: red">siz sovgalar bolimidasiz</h1>`);
+
+app.get('/', (req, res) => {
+    res.render("harid");
 });
 
 
